@@ -14,6 +14,17 @@ def exampleRequest : Request :=
       ]
   }
 
+def financeReadCondition : Expr :=
+  .allOf
+    (.actionEq ⟨"read"⟩)
+    (.allOf
+      (.attributeEq ⟨"department"⟩ (.text "finance"))
+      (.attributeEq ⟨"mfa"⟩ (.bool true)))
+
 def main : IO Unit := do
   IO.println "Verified Policy Evaluator"
-  IO.println s!"Example request: {reprStr exampleRequest}"
+  IO.println s!"Request: {reprStr exampleRequest}"
+  IO.println
+    s!"Finance read condition matched: {
+      financeReadCondition.evaluate exampleRequest
+    }"
