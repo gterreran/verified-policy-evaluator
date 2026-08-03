@@ -32,4 +32,3 @@ jobs:
           test-args: "--wfail"
           nanoda: true
           nanoda-allow-sorry: false
-          

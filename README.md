@@ -232,7 +232,6 @@ GitHub Actions runs:
 ```bash
 lake build --wfail
 lake test --wfail
-lake test
 ```
 
 Warnings are treated as failures. CI also uses an independent Lean environment checker and rejects proofs that rely on `sorry`.
