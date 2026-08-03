@@ -3,3 +3,4 @@ import VerifiedPolicyEvaluator.Expression
 import VerifiedPolicyEvaluator.Policy
 import VerifiedPolicyEvaluator.ReferenceEvaluator
 import VerifiedPolicyEvaluator.Semantics
+import VerifiedPolicyEvaluator.Proofs.SecurityProperties
