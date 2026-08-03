@@ -14,17 +14,34 @@ def exampleRequest : Request :=
       ]
   }
 
-def financeReadCondition : Expr :=
-  .allOf
-    (.actionEq ⟨"read"⟩)
-    (.allOf
-      (.attributeEq ⟨"department"⟩ (.text "finance"))
-      (.attributeEq ⟨"mfa"⟩ (.bool true)))
+def financeReadPermit : Policy :=
+  {
+    name := "permit-finance-read"
+    effect := .permit
+    condition :=
+      .allOf
+        (.actionEq ⟨"read"⟩)
+        (.attributeEq ⟨"department"⟩ (.text "finance"))
+  }
+
+def requireMfaForbid : Policy :=
+  {
+    name := "forbid-without-mfa"
+    effect := .forbid
+    condition :=
+      .negate
+        (.attributeEq ⟨"mfa"⟩ (.bool true))
+  }
+
+def examplePolicies : List Policy :=
+  [
+    financeReadPermit,
+    requireMfaForbid
+  ]
 
 def main : IO Unit := do
+  let decision := authorizeReference examplePolicies exampleRequest
+
   IO.println "Verified Policy Evaluator"
   IO.println s!"Request: {reprStr exampleRequest}"
-  IO.println
-    s!"Finance read condition matched: {
-      financeReadCondition.evaluate exampleRequest
-    }"
+  IO.println s!"Decision: {reprStr decision}"
