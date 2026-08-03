@@ -71,11 +71,12 @@ private def permitAlice : Policy :=
     condition := .principalEq ⟨"alice"⟩
   }
 
-private def permitRead : Policy :=
+private def permitPublicDocument : Policy :=
   {
-    name := "permit-read"
+    name := "permit-public-document"
     effect := .permit
-    condition := .actionEq ⟨"read"⟩
+    condition :=
+      .resourceEq ⟨"public-document"⟩
   }
 
 private def permitFinance : Policy :=
@@ -114,7 +115,7 @@ private def forbidWithoutMfa : Policy :=
 private def basePolicies : List Policy :=
   [
     permitAlice,
-    permitRead,
+    permitPublicDocument,
     permitFinance,
     forbidBob,
     forbidWrite,

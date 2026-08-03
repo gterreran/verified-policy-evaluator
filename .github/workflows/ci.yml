@@ -29,5 +29,7 @@ jobs:
           build: true
           test: true
           build-args: "--wfail"
+          test-args: "--wfail"
           nanoda: true
           nanoda-allow-sorry: false
+          

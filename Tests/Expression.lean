@@ -85,4 +85,16 @@ example :
       bobRequest = true := by
   decide
 
+example :
+    Expr.evaluate
+      (.resourceEq ⟨"financial-report"⟩)
+      aliceRequest = true := by
+  decide
+
+example :
+    Expr.evaluate
+      (.resourceEq ⟨"engineering-report"⟩)
+      aliceRequest = false := by
+  decide
+
 end VerifiedPolicyEvaluator.Tests
