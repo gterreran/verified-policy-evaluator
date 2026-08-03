@@ -21,7 +21,9 @@ def financeReadPermit : Policy :=
     condition :=
       .allOf
         (.actionEq ⟨"read"⟩)
-        (.attributeEq ⟨"department"⟩ (.text "finance"))
+        (.attributeEq
+          ⟨"department"⟩
+          (.text "finance"))
   }
 
 def requireMfaForbid : Policy :=
@@ -40,8 +42,15 @@ def examplePolicies : List Policy :=
   ]
 
 def main : IO Unit := do
-  let decision := authorizeReference examplePolicies exampleRequest
+  let compiled := compilePolicies examplePolicies
+
+  let referenceDecision :=
+    authorizeReference examplePolicies exampleRequest
+
+  let compiledDecision :=
+    authorizeCompiled compiled exampleRequest
 
   IO.println "Verified Policy Evaluator"
   IO.println s!"Request: {reprStr exampleRequest}"
-  IO.println s!"Decision: {reprStr decision}"
+  IO.println s!"Reference decision: {reprStr referenceDecision}"
+  IO.println s!"Compiled decision: {reprStr compiledDecision}"
