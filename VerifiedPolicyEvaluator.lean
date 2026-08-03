@@ -7,3 +7,4 @@ import VerifiedPolicyEvaluator.Proofs.SecurityProperties
 import VerifiedPolicyEvaluator.Proofs.OrderIndependence
 import VerifiedPolicyEvaluator.Compiler
 import VerifiedPolicyEvaluator.CompiledEvaluator
+import VerifiedPolicyEvaluator.Proofs.CompilerCorrectness
